@@ -6,7 +6,7 @@ Laravel 10 と Vanilla JS で作るリアクションタイム計測アプリ
 
 ## デモ
 
-> **本番 URL**: [https://your-demo-url.example](https://speed-clicker.fly.dev/)
+> **本番 URL**: [https://speed-clicker.fly.dev/](https://speed-clicker.fly.dev/)
 >
 > **スクリーンショット / GIF**: （後日追加予定）
 
