@@ -120,8 +120,8 @@ php artisan serve
 
 ## 作者
 
-* Name: Kumiko "くみちゃん" Doi
-* TechAcademy ブートキャンプ（PHP/Laravelコース）卒業 2025
+* Name: Doi
+* TechAcademy（PHP/Laravelコース）卒業 2025
 * Portfolio: [https://your-portfolio.example](https://your-portfolio.example)
 
 ---
