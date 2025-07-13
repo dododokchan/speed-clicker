@@ -3,10 +3,14 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Api\ScoreController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HistoryController;
 
-Route::get('/', function () {
-    return redirect()->route('game');
-});
+/**
+ * ゲストもアクセスできるルート
+ */
+Route::get('/', fn () => redirect()->route('game')); // トップは /game へ
+Route::get('/game', fn () => view('game'))->name('game'); // ゲーム画面
+Route::get('/ranking', [RankingController::class, 'index'])->name('ranking'); // ランキング（閲覧のみ）
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -18,14 +22,17 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Speed Clicker のスコア保存
+    // スコア保存
     Route::post('/api/scores', [ScoreController::class, 'store'])
          ->name('api.scores.store');
-});
 
-Route::middleware('auth')->get('/game', function () {
-    return view('game');
-})->name('game');
+    // 平均スコア履歴表示・削除
+    Route::get('/history', [HistoryController::class, 'index'])->name('history');
+    Route::delete('/history/{id}', [HistoryController::class, 'destroy'])->name('history.destroy');
+
+    //管理画面
+    Route::view('/admin', 'admin')->name('admin');
+});
 
 /* ★ ここがログイン／登録などのルートを読み込む一行 */
 require __DIR__.'/auth.php';
