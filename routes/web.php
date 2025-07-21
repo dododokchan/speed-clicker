@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Api\ScoreController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\RankingController;
+use App\Http\Controllers\Admin\DashboardController;
 
 /**
  * ゲストもアクセスできるルート
@@ -30,8 +32,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/history', [HistoryController::class, 'index'])->name('history');
     Route::delete('/history/{id}', [HistoryController::class, 'destroy'])->name('history.destroy');
 
-    //管理画面
-    Route::view('/admin', 'admin')->name('admin');
+    // 管理ダッシュボード
+    Route::get('/admin', [DashboardController::class, 'index'])
+         ->name('admin.dashboard');
 });
 
 /* ★ ここがログイン／登録などのルートを読み込む一行 */
