@@ -69,7 +69,14 @@ document.addEventListener("DOMContentLoaded", () => {
      * @param {number|string} avg 平均 ms
      */
     async function postAverageScore(avg) {
+        //ゲストなら POST 自体しない
+        if (!window.isLoggedIn) {
+            resetGame();
+            return;
+        }
+
         try {
+            //通信(fetch)は失敗する可能性がある
             const response = await fetch("/api/scores", {
                 method: "POST",
                 headers: {
@@ -82,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
             });
 
             if (!response.ok) {
-                // 422 などはここに入る
+                // 422 や 500 など “成功ではない HTTP ステータス”
                 const err = await response.json();
                 alert(
                     "保存に失敗しました: " +
@@ -91,16 +98,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // 成功
+            // fetch が成功し、かつ 200 系ステータス
             const resJson = await response.json();
             console.log(resJson);
-            alert("スコア保存完了！🌟");
+            alert("スコア保存完了🌟");
         } catch (e) {
+            //ネットワークエラー・JSON 解析エラーなど
             console.error(e);
             alert("通信エラーが発生しました");
         } finally {
-            // ゲームをリセットして再挑戦可に
-            resetGame();
+            // ゲームをリセットして再挑戦可に(成功／失敗に関係なく毎回呼ばれる)
+            resetGame(); //もう一度ゲームを開始できるよう UI をリセット
         }
     }
 
