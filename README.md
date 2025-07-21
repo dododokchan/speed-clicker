@@ -1,6 +1,8 @@
 # Speed Clicker
 
-Laravel 10 と Vanilla JS で作るリアクションタイム計測アプリ
+Speed Clicker は、5 回の反応時間を計測し平均スコアを保存できるミニゲームです。
+スコア履歴やランキング機能を備えており、ユーザーごとの成績を比較できます。
+ゲストモードでもプレイ可能で、ログインユーザーは記録を保存・管理できます。
 
 ---
 
@@ -8,28 +10,36 @@ Laravel 10 と Vanilla JS で作るリアクションタイム計測アプリ
 
 > **本番 URL**: [https://speed-clicker.fly.dev/](https://speed-clicker.fly.dev/)
 >
-> **スクリーンショット / GIF**: （後日追加予定）
+> |                  | 画面イメージ             |
+> | ---------------- | ------------------------ |
+> | ゲームトップ画面 | ![](image/game_top.png)  |
+> | ゲームプレイ画面 | ![](image/game_play.png) |
 
 ---
 
 ## 目的
 
-| なぜ作ったか                                | ポートフォリオで示したいこと                          |
-| ------------------------------------------- | ----------------------------------------------------- |
-| Laravel + JS のフルスタック実装力をアピール | 認証、REST API、Eloquent、Vite、Tailwind を一通り使用 |
-| クリーンコードとテストの姿勢を示す          | Form Request、PHPUnit、ESLint を採用                  |
-| デプロイワークフローを体験                  | CI→CD→Render/Fly.io へ無料公開                        |
+このアプリは、Laravel + JavaScript を用いたフルスタック開発のスキルを示すことを目的に制作しました。
+以下のスキルを実践し、ポートフォリオとして採用担当者に提出できる形を目指しています。
+
+-   認証・API 設計・データベースの活用
+-   ゲスト操作やスコア制限の実装
+-   UI/UX デザイン（Alpine.js, Tailwind）
+-   CI/CD デプロイ体験（Fly.io）
 
 ---
 
-## コア機能
+## 主な機能
 
--   ゲーム: 5 回の反応時間を計測し平均を算出
--   認証: Breeze（セッションログイン）
--   API: `POST /api/scores` で平均スコアを保存
--   履歴ページ: 自分のスコア一覧 （TODO）
--   ランキング: 全体トップ 10 （TODO）
--   管理者機能: ユーザー・スコア削除 （TODO）
+| 機能                 | 説明                                                                 | 開発状況    |
+| -------------------- | -------------------------------------------------------------------- | ----------- |
+| ゲームプレイ         | 5 回の反応時間を計測し、平均スコアを表示                             | ✅ 実装済み |
+| スコア保存           | ログイン済ユーザーは 1 日 10 件までスコアを保存可能                  | ✅ 実装済み |
+| ゲストモード対応     | ログインなしでもゲーム体験可能（スコア保存は不可）＆ランキング閲覧可 | ✅ 実装済み |
+| スコア履歴ページ     | 自分の保存スコアを一覧表示＆削除可能                                 | ✅ 実装済み |
+| ランキングページ     | 全ユーザーの上位スコア（トップ 50）を表示。自分の順位も確認可能      | ✅ 実装済み |
+| ユーザー情報管理     | ユーザー名・メール・パスワードの変更が可能                           | 🔧 開発中   |
+| 管理者ダッシュボード | ユーザー・スコアの一括管理画面                                       | 📝 未着手   |
 
 ---
 
@@ -61,25 +71,43 @@ scores
    created_at
 ```
 
-（Mermaid 図を後日追加予定）
+---
+
+## ページ構成
+
+| パス        | 概要                                       |
+| ----------- | ------------------------------------------ |
+| `/`         | `/game` にリダイレクト                     |
+| `/game`     | ゲーム画面（ゲストも可）                   |
+| `/login`    | ログイン画面                               |
+| `/register` | 新規登録画面                               |
+| `/history`  | スコア履歴一覧（削除可）                   |
+| `/ranking`  | ランキング表示（上位 50 件＋自分のスコア） |
+| `/profile`  | プロフィール編集                           |
 
 ---
 
 ## ローカル環境構築
 
 ```
-git clone https://github.com/yourname/speed-clicker.git
+# 1. プロジェクトを取得
+git clone git@github.com:yourname/speed-clicker.git
 cd speed-clicker
+
+# 2. PHP / JS パッケージをインストール
 composer install
-
 npm install
-npm run dev &
 
+# 3. 環境設定
 cp .env.example .env
 php artisan key:generate
+
+# 4. DB作成・初期化
 touch database/database.sqlite
 php artisan migrate
 
+# 5. 開発サーバ起動（2つのターミナルで別々に実行）
+npm run dev
 php artisan serve
 ```
 
@@ -88,19 +116,18 @@ php artisan serve
 ## デプロイ手順（概要）
 
 1. GitHub に push
-2. Render か Fly.io と連携し環境変数を設定
+2. Fly.io でアプリをホスティング
 3. Build コマンド: `composer install && npm ci && npm run build`
-4. デプロイフックで `php artisan migrate --force` を実行
-
-（詳細手順は後日追記予定）
+4. リリース時に `php artisan migrate --force` を実行
+5. `.env` など環境変数の設定も Fly.io 上で行う
 
 ---
 
-## テスト
+## テスト・CI(予定)
 
--   PHPUnit: モデル・API のユニット / フィーチャテスト
--   JS: 平均計算ロジックのユニットテスト （TODO）
--   E2E: Playwright/Cypress でクリックフロー （Nice-to-have）
+-   `php artisan test`：Laravel 側の API・モデルが正しく動くか確認するテスト
+-   `vitest run`：クリック平均を出す JS の計算処理を自動でチェックするテスト（予定）
+-   GitHub Actions：コードを GitHub にアップした時、自動でテストを走らせる仕組みを今後追加予定
 
 ---
 
@@ -115,6 +142,8 @@ php artisan serve
 -   [ ] 画面キャプチャとデモ URL を README に追加
 -   [ ] Mermaid ER 図を README に追加
 -   [ ] Vitest で平均計算ロジックをテスト
+-   [ ] JS: 平均スコアを数値で送る（文字列 →float）
+-   [ ] JS: alert() をトースト通知に変更
 
 ---
 
@@ -122,7 +151,6 @@ php artisan serve
 
 -   Name: Doi
 -   TechAcademy（PHP/Laravel コース）卒業 2025
--   Portfolio: [https://your-portfolio.example](https://your-portfolio.example)
 
 ---
 
