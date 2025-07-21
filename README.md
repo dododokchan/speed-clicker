@@ -133,13 +133,9 @@ php artisan serve
 
 ## TODO
 
--   [ ] 履歴ページ (`/history`) の実装
--   [ ] ランキングページ (`/ranking`) の実装
--   [ ] 管理ダッシュボード
 -   [ ] ページネーションと CSV エクスポート
 -   [ ] レスポンシブ対応とダークモード
 -   [ ] CI: PHPStan、ESLint、PHPUnit を PR 時に実行
--   [ ] 画面キャプチャとデモ URL を README に追加
 -   [ ] Mermaid ER 図を README に追加
 -   [ ] Vitest で平均計算ロジックをテスト
 -   [ ] JS: 平均スコアを数値で送る（文字列 →float）
