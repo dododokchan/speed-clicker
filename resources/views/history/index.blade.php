@@ -46,9 +46,5 @@
             </div>
         @endforeach
 
-        {{-- ページネーション（$scores が Paginator の場合） --}}
-        <div class="mt-6">
-            {{ $scores->links() }}
-        </div>
     </div>
 @endsection
