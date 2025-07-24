@@ -60,6 +60,8 @@ document.addEventListener("DOMContentLoaded", () => {
             // 5 回終了 → 平均計算 & POST
             const avg = trials.reduce((a, b) => a + b, 0) / trials.length;
             averageEl.textContent = `Average: ${avg.toFixed(1)} ms`;
+            // ★ ゲスト・ログイン共通で平均スコアをポップアップ表示
+            alert(`あなたの平均スコアは ${avg.toFixed(1)} ms でした🕰️🌟`);
             postAverageScore(avg.toFixed(1));
         }
     };
