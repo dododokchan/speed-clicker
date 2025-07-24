@@ -9,6 +9,12 @@
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
+        @if ($errors->has('email'))
+    <div class="mb-4 rounded-lg bg-red-50 p-4 text-red-700 shadow">
+        {{ $errors->first('email') }}
+    </div>
+@endif
+
         <!-- Email -->
         <div>
             <label for="email">メールアドレス</label>
