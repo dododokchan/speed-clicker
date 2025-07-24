@@ -78,11 +78,14 @@ return [
     |
     */
 
-    'locale' => env('APP_LOCALE', 'en'),
+    // アプリのデフォルト言語を日本語に設定
+    'locale' => env('APP_LOCALE', 'ja'),
 
+    // 未翻訳文字列は英語をフォールバック
     'fallback_locale' => env('APP_FALLBACK_LOCALE', 'en'),
 
-    'faker_locale' => env('APP_FAKER_LOCALE', 'en_US'),
+    // Faker で日本語ダミーデータを生成
+    'faker_locale' => env('APP_FAKER_LOCALE', 'ja_JP'),
 
     /*
     |--------------------------------------------------------------------------
