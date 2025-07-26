@@ -29,9 +29,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/history/{id}', [HistoryController::class, 'destroy'])->name('history.destroy');
 
     // 管理ダッシュボード
-    Route::get('/admin', [DashboardController::class, 'index'])
-         ->name('admin.dashboard');
-});
+    Route::prefix('admin')->name('admin.')->group(function () {
+          Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+          Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+        });
+    });
 
 /* ★ ここがログイン／登録などのルートを読み込む一行 */
 require __DIR__.'/auth.php';
