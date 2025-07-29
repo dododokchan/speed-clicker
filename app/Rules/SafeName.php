@@ -10,19 +10,21 @@ class SafeName implements ValidationRule
     /** NGワード */
     protected array $banned = ['死ね', 'fuck', 'sex', 'shit'];
 
-    public function passes($attribute, $value): bool
+    public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         //文字（ひらがなカタカナ漢字英数 _-）を許可
         if (!preg_match('/^[\p{L}\p{N}_\-ぁ-んァ-ヶー一-龠]+$/u', $value)) {
-            return false;
+            $fail('使用できない文字が含まれています。');
+            return;
         }
+
         //NGワード
         foreach ($this->banned as $word) {
             if (stripos($value, $word) !== false) {
-                return false;
+                $fail("不適切な語句 '{$word}' が含まれています。");
+                return;
             }
         }
-        return true;
     }
 
     public function message(): string
