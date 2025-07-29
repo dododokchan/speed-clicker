@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 
+use App\Http\Requests\UpdatePasswordRequest;
+use Illuminate\Support\Facades\Hash;
+
 class ProfileController extends Controller
 {
     /**
@@ -34,7 +37,12 @@ class ProfileController extends Controller
 
         $request->user()->save();
 
-        return Redirect::route('profile.edit')->with('status', 'profile-updated');
+        // 更新完了後、呼び出し元に応じてリダイレクト先を切り替え
+        $redirectRoute = $request->routeIs('admin.*')
+            ? 'admin.dashboard'      // 管理メニューへ戻る
+            : 'profile.edit';        // 通常プロフィール画面へ戻る
+
+        return Redirect::route($redirectRoute)->with('status', 'profile-updated');
     }
 
     /**
@@ -56,5 +64,13 @@ class ProfileController extends Controller
         $request->session()->regenerateToken();
 
         return Redirect::to('/');
+    }
+
+    /** 管理メニュー用ユーザー情報編集フォーム */
+    public function editAdmin(Request $request): View
+    {
+        return view('admin.profile_edit', [
+            'user' => $request->user(),
+        ]);
     }
 }

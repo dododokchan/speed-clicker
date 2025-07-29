@@ -20,10 +20,6 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // スコア保存
-    Route::post('/api/scores', [ScoreController::class, 'store'])
-         ->name('api.scores.store');
-
     // 平均スコア履歴表示・削除
     Route::get('/history', [HistoryController::class, 'index'])->name('history');
     Route::delete('/history/{id}', [HistoryController::class, 'destroy'])->name('history.destroy');
@@ -31,6 +27,7 @@ Route::middleware('auth')->group(function () {
     // 管理ダッシュボード
     Route::prefix('admin')->name('admin.')->group(function () {
           Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
+          Route::get('/profile', [ProfileController::class, 'editAdmin'])->name('profile.edit');
           Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
         });
     });
