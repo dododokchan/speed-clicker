@@ -54,13 +54,15 @@
         {{-- 上部メッセージだけ中央表示 --}}
 
         {{-- ハンバーガーメニュー --}}
-        <div x-data="{ open: false }" class="absolute top-4 right-4 z-50 flex justify-end w-full" @mouseenter="open = true" @mouseleave="open = false">
-            <button class="focus:outline-none">
-                <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M4 6h16M4 12h16M4 18h16"/>
-                </svg>
-            </button>
+        <div x-data="{ open: false }" class="absolute top-4 right-4 z-50 flex justify-end w-full">
+            <div class="relative"  @mouseenter="open = true" @mouseleave="open = false">
+                <button class="focus:outline-none">
+                    <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                </button>
+            </div>
             <div x-show="open"
                 class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg py-2 z-50">
                 @guest
