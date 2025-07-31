@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <title>Speed Clicker Game</title>
     {{-- Tailwind（Vite ビルド済み CSS） --}}
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @vite(['resources/css/app.css', 'resources/js/app.js', 'resources/js/game.js'])
     {{-- CSRF トークンを JS からも参照できるように埋め込む --}}
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
