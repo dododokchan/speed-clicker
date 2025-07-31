@@ -6,11 +6,11 @@ storage/framework/cache/*
 storage/framework/sessions/*
 storage/framework/views/*
 storage/logs/*
-*.env*
+.env
 .rr.yml
 rr
 frankenphp
-vendor
+# vendor
 
 # 2. Ignore common files/directories we don't need
 fly.toml
