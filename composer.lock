@@ -6119,24 +6119,24 @@
         },
         {
             "name": "fly-apps/dockerfile-laravel",
-            "version": "1.0.7",
+            "version": "1.0.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fly-apps/dockerfile-laravel.git",
-                "reference": "762b43f8641787fdcd82a0b7f984e204d9f367ac"
+                "reference": "ac2cfbf95b12ed4102ecf44d66417dca6674642f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fly-apps/dockerfile-laravel/zipball/762b43f8641787fdcd82a0b7f984e204d9f367ac",
-                "reference": "762b43f8641787fdcd82a0b7f984e204d9f367ac",
+                "url": "https://api.github.com/repos/fly-apps/dockerfile-laravel/zipball/ac2cfbf95b12ed4102ecf44d66417dca6674642f",
+                "reference": "ac2cfbf95b12ed4102ecf44d66417dca6674642f",
                 "shasum": ""
             },
             "require-dev": {
-                "illuminate/view": "^10.0",
-                "laravel-zero/framework": "^10.2",
+                "illuminate/view": "^11.0",
+                "laravel-zero/framework": "^11.0",
                 "laravel/pint": "^1.13",
                 "mockery/mockery": "^1.6",
-                "nunomaduro/termwind": "^1.15.1",
+                "nunomaduro/termwind": "^2.0",
                 "pestphp/pest": "^2.22",
                 "phpspec/php-diff": "^1.1"
             },
@@ -6181,9 +6181,9 @@
             ],
             "support": {
                 "issues": "https://github.com/fly-apps/dockerfile-laravel/issues",
-                "source": "https://github.com/fly-apps/dockerfile-laravel/tree/1.0.7"
+                "source": "https://github.com/fly-apps/dockerfile-laravel/tree/1.0.8"
             },
-            "time": "2024-12-09T15:59:57+00:00"
+            "time": "2025-07-25T16:55:23+00:00"
         },
         {
             "name": "hamcrest/hamcrest-php",
