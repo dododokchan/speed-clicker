@@ -54,8 +54,8 @@
         {{-- 上部メッセージだけ中央表示 --}}
 
         {{-- ハンバーガーメニュー --}}
-        <div x-data="{ open: false }" class="absolute top-4 right-4 z-50 flex justify-end w-full">
-            <div class="relative"  @mouseenter="open = true" @mouseleave="open = false">
+        <div x-data="{ open: false }" class="absolute top-4 right-4 z-50 flex justify-end w-full" @mouseenter="open = true" @mouseleave="open = false">
+            <div class="relative">
                 <button class="focus:outline-none">
                     <svg class="w-6 h-6 text-gray-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
