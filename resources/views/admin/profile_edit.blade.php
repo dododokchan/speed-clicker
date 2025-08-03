@@ -1,3 +1,5 @@
+@extends('layouts.app') {{-- 既存レイアウト起用 --}}
+
 <x-admin-layout>
     <h2 class="text-2xl font-bold mb-6">ユーザー情報編集</h2>
 
